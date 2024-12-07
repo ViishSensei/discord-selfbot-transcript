@@ -4,7 +4,7 @@
 
 Discord Selfbot Transcripts is a node.js module to generate nice looking HTML transcripts. Processes discord markdown like **bold**, _italics_, ~~strikethroughs~~, and more. Nicely formats attachments and embeds. Built in XSS protection, preventing users from inserting html tags.
 
-**This module is designed to work with [discord.js](https://discord.js.org/#/) v13.**
+**This module is designed to work with [discord.js-selfbot-v13](https://https://discordjs-self-v13.netlify.app/#/) v3.4.2.**
 
 HTML Template stolen from [DiscordChatExporter](https://github.com/Tyrrrz/DiscordChatExporter).
 
@@ -17,7 +17,7 @@ HTML Template stolen from [DiscordChatExporter](https://github.com/Tyrrrz/Discor
 ### Example usage using the built in message fetcher.
 
 ```js
-const discordTranscripts = require("discord-html-transcripts");
+const discordTranscripts = require("discord-selfbot-transcripts");
 
 const channel = message.channel; // or however you get your TextChannel
 
@@ -32,7 +32,7 @@ channel.send({
 ### Or if you prefer, you can pass in your own messages.
 
 ```js
-const discordTranscripts = require("discord-html-transcripts");
+const discordTranscripts = require("discord-selfbot-transcripts");
 
 const messages = someWayToGetMessages(); // Must be Collection<string, Message> or Message[]
 const channel = someWayToGetChannel(); // Used for ticket name, guild icon, and guild name
