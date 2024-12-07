@@ -2,19 +2,25 @@
 
 [![Discord](https://img.shields.io/discord/555474311637499955?label=discord)](https://discord.gg/viish)
 
-Discord Selfbot Transcripts is a node.js module to generate nice looking HTML transcripts. Processes discord markdown like **bold**, _italics_, ~~strikethroughs~~, and more. Nicely formats attachments and embeds. Built in XSS protection, preventing users from inserting html tags.
+**Discord.js-selfbot-v13 Selfbot Transcripts** is a **modified version** of [discord-html-transcripts](https://github.com/ItzDerock/discord-html-transcripts) designed to generate visually appealing HTML transcripts for Discord messages. It processes Discord markdown like **bold**, _italics_, ~~strikethroughs~~, and more while formatting attachments and embeds beautifully. Built-in XSS protection prevents users from inserting HTML tags.
 
-**This module is designed to work with [discord.js-selfbot-v13](https://https://discordjs-self-v13.netlify.app/#/) v3.4.2.**
+**This module is built purely for fun purposes with no intent to violate Discord's Terms of Service. Use it responsibly.**
 
-HTML Template stolen from [DiscordChatExporter](https://github.com/Tyrrrz/DiscordChatExporter).
+**Note:** This module is tailored for use with [discord.js-selfbot-v13](https://discordjs-self-v13.netlify.app/#/) v3.4.2.
+
+HTML template credits to [DiscordChatExporter](https://github.com/Tyrrrz/DiscordChatExporter).
+
+---
 
 ## Example Output
 
 ![output](./src/assets/styles.png)
 
+---
+
 ## Usage
 
-### Example usage using the built in message fetcher.
+### Example Usage with Built-in Message Fetcher
 
 ```js
 const discordTranscripts = require("discord-selfbot-transcripts");
@@ -29,7 +35,7 @@ channel.send({
 });
 ```
 
-### Or if you prefer, you can pass in your own messages.
+### Or Provide Your Own Messages
 
 ```js
 const discordTranscripts = require("discord-selfbot-transcripts");
@@ -45,11 +51,11 @@ channel.send({
 });
 ```
 
+---
+
 ## Configuration
 
-Both methods of generating a transcript allow for an option object as the last parameter.
-
-### Built in Message Fetcher
+### Built-in Message Fetcher
 
 ```js
 const attachment = await createTranscript(channel, {
@@ -59,7 +65,7 @@ const attachment = await createTranscript(channel, {
 });
 ```
 
-### Providing your own messages
+### Providing Your Own Messages
 
 ```js
 const attachment = await generateFromMessages(messages, channel, {
@@ -67,3 +73,7 @@ const attachment = await generateFromMessages(messages, channel, {
   fileName: "transcript.html", // Only valid with returnBuffer false. Name of attachment.
 });
 ```
+
+---
+
+**Disclaimer:** This modified version is a fork of [discord-html-transcripts](https://github.com/ItzDerock/discord-html-transcripts) and is created solely for fun purposes. It is not intended for misuse or to violate Discord's Terms of Service. Always ensure compliance with platform policies when using such tools.
