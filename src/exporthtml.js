@@ -9,6 +9,9 @@ const he = require("he");
 
 const template = fs.readFileSync(path.join(__dirname, "template.html"), "utf8");
 
+// copilot helped so much here
+// copilot smart 🧠
+
 /**
  *
  * @param {discord.Collection<string, discord.Message> | discord.Message[]} messages
@@ -30,28 +33,54 @@ function generateTranscript(
 
   const isDM = !channel.guild;
 
+  const favicon = document.createElement("link");
+  favicon.rel = "icon";
+  favicon.href = isDM
+    ? channel.recipient?.displayAvatarURL({ dynamic: true }) ||
+      "default-icon-url.png"
+    : channel.guild?.iconURL() || "default-guild-icon-url.png";
+  favicon.type = "image/x-icon";
+
+  document.head.appendChild(favicon);
+
+  const title = isDM
+    ? channel.recipient?.username + " - (DM)" || "Direct Message"
+    : channel.guild?.name + " - (Server)" || "Server";
+
+  document.title = title;
+
   document.getElementsByClassName("preamble__guild-icon")[0].src = isDM
-    ? channel.recipient.displayAvatarURL({ dynamic: true })
-    : channel.guild.iconURL();
+    ? channel.recipient?.displayAvatarURL({ dynamic: true }) ||
+      "default-icon-url.png"
+    : channel.guild?.iconURL() || "default-guild-icon-url.png";
 
   document.getElementById("guildname").textContent = isDM
-    ? channel.recipient.username
-    : channel.guild.name;
+    ? channel.recipient?.username + " - (" + channel.recipient?.id + ")" ||
+      "Unknown User"
+    : channel.guild?.name + " - (" + channel.guild?.id + ")" ||
+      "Unknown Server";
 
-  document.getElementById("ticketname").textContent = channel.name;
+  document.getElementById("ticketname").textContent = isDM
+    ? channel.name || "Direct Message"
+    : channel.name || "Unknown Channel";
 
   const transcript = document.getElementById("chatlog");
 
+  // Messages
   for (const message of Array.from(messages.values()).sort(
     (a, b) => a.createdTimestamp - b.createdTimestamp,
   )) {
+    // create message group
     const messageGroup = document.createElement("div");
     messageGroup.classList.add("chatlog__message-group");
 
+    // message reference
     if (message.reference?.messageId) {
+      // create symbol
       const referenceSymbol = document.createElement("div");
       referenceSymbol.classList.add("chatlog__reference-symbol");
 
+      // create reference
       const reference = document.createElement("div");
       reference.classList.add("chatlog__reference");
 
@@ -95,6 +124,7 @@ function generateTranscript(
       messageGroup.appendChild(reference);
     }
 
+    // message author pfp
     const author = message.author ?? static.DummyUser;
 
     const authorElement = document.createElement("div");
@@ -109,9 +139,11 @@ function generateTranscript(
     authorElement.appendChild(authorAvatar);
     messageGroup.appendChild(authorElement);
 
+    // message content
     const content = document.createElement("div");
     content.classList.add("chatlog__messages");
 
+    // message author name
     const authorName = document.createElement("span");
     authorName.classList.add("chatlog__author-name");
     authorName.title = xss(author.tag);
@@ -127,6 +159,7 @@ function generateTranscript(
       content.appendChild(botTag);
     }
 
+    // timestamp
     const timestamp = document.createElement("span");
     timestamp.classList.add("chatlog__timestamp");
     timestamp.textContent = message.createdAt.toLocaleString();
@@ -139,6 +172,7 @@ function generateTranscript(
     messageContent.setAttribute("id", `message-${message.id}`);
     messageContent.title = `Message sent: ${message.createdAt.toLocaleString()}`;
 
+    // message content
     if (message.content) {
       const messageContentContent = document.createElement("div");
       messageContentContent.classList.add("chatlog__content");
@@ -161,6 +195,7 @@ function generateTranscript(
       messageContent.appendChild(messageContentContent);
     }
 
+    // message attachments
     if (message.attachments && message.attachments.size > 0) {
       for (const attachment of message.attachments.values()) {
         const attachmentsDiv = document.createElement("div");
@@ -249,11 +284,13 @@ function generateTranscript(
 
     content.appendChild(messageContent);
 
+    // embeds
     if (message.embeds && message.embeds.length > 0) {
       for (const embed of message.embeds) {
         const embedDiv = document.createElement("div");
         embedDiv.classList.add("chatlog__embed");
 
+        // embed color
         if (embed.hexColor) {
           const embedColorPill = document.createElement("div");
           embedColorPill.classList.add("chatlog__embed-color-pill");
@@ -271,6 +308,7 @@ function generateTranscript(
         const embedText = document.createElement("div");
         embedText.classList.add("chatlog__embed-text");
 
+        // embed author
         if (embed.author?.name) {
           const embedAuthor = document.createElement("div");
           embedAuthor.classList.add("chatlog__embed-author");
@@ -307,6 +345,7 @@ function generateTranscript(
           embedText.appendChild(embedAuthor);
         }
 
+        // embed title
         if (embed.title) {
           const embedTitle = document.createElement("div");
           embedTitle.classList.add("chatlog__embed-title");
@@ -333,6 +372,7 @@ function generateTranscript(
           embedText.appendChild(embedTitle);
         }
 
+        // embed description
         if (embed.description) {
           const embedDescription = document.createElement("div");
           embedDescription.classList.add("chatlog__embed-description");
@@ -352,6 +392,7 @@ function generateTranscript(
           embedText.appendChild(embedDescription);
         }
 
+        // embed fields
         if (embed.fields && embed.fields.length > 0) {
           const embedFields = document.createElement("div");
           embedFields.classList.add("chatlog__embed-fields");
@@ -364,6 +405,7 @@ function generateTranscript(
                 : ["chatlog__embed-field", "chatlog__embed-field--inline"]),
             );
 
+            // Field name
             const embedFieldName = document.createElement("div");
             embedFieldName.classList.add("chatlog__embed-field-name");
 
@@ -377,6 +419,7 @@ function generateTranscript(
             embedFieldName.appendChild(embedFieldNameMarkdown);
             embedField.appendChild(embedFieldName);
 
+            // Field value
             const embedFieldValue = document.createElement("div");
             embedFieldValue.classList.add("chatlog__embed-field-value");
 
@@ -402,6 +445,7 @@ function generateTranscript(
 
         embedContent.appendChild(embedText);
 
+        // embed thumbnail
         if (embed.thumbnail?.proxyURL ?? embed.thumbnail?.url) {
           const embedThumbnail = document.createElement("div");
           embedThumbnail.classList.add("chatlog__embed-thumbnail-container");
@@ -426,6 +470,7 @@ function generateTranscript(
 
         embedContentContainer.appendChild(embedContent);
 
+        // embed image
         if (embed.image) {
           const embedImage = document.createElement("div");
           embedImage.classList.add("chatlog__embed-image-container");
@@ -446,6 +491,7 @@ function generateTranscript(
           embedContentContainer.appendChild(embedImage);
         }
 
+        // footer
         if (embed.footer?.text) {
           const embedFooter = document.createElement("div");
           embedFooter.classList.add("chatlog__embed-footer");
@@ -508,7 +554,7 @@ function formatContent(
   purify = he.escape,
 ) {
   content = purify(content)
-    .replace(/\&\#x60;/g, "`")
+    .replace(/\&\#x60;/g, "`") // we dont want ` to be escaped
     .replace(/```(.+?)```/gs, (code) => {
       if (!replyStyle) {
         const split = code.slice(3, -3).split("\n");
@@ -584,7 +630,7 @@ function formatContent(
 
   return replyStyle
     ? content.replace(/(?:\r\n|\r|\n)/g, " ")
-    : content.replace(/(?:\r\n|\r|\n)/g, "<br />");
+    : content.replace(/(?:\r\n|\r|\n)/g, "<br />"); // do this last
 }
 
 function formatBytes(bytes, decimals = 2) {

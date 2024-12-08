@@ -1,6 +1,6 @@
 {
   "name": "discord-selfbot-transcripts",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A nicely formatted html transcript generator for discord.js-selfbot-v13",
   "main": "src/index.js",
   "homepage": "https://github.com/ViishSensei/discord-selfbot-transcripts",
@@ -19,7 +19,6 @@
   "author": "ViishSensei",
   "license": "GNU GPLv3",
   "dependencies": {
-    "discord.js": "^13.6.0",
     "discord.js-selfbot-v13": "^3.4.5",
     "dompurify": "^2.3.5",
     "he": "^1.2.0",

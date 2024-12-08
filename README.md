@@ -1,8 +1,14 @@
+---
+
 # Discord.js-selfbot-v13 Selfbot Transcripts
 
-[![Discord](https://img.shields.io/discord/555474311637499955?label=discord)](https://discord.gg/viish)
+[![Discord](https://img.shields.io/discord/1275486972252786730?label=discord)](https://discord.gg/viish)
 
 **Discord.js-selfbot-v13 Selfbot Transcripts** is a **modified version** of [discord-html-transcripts](https://github.com/ItzDerock/discord-html-transcripts) designed to generate visually appealing HTML transcripts for Discord messages. It processes Discord markdown like **bold**, _italics_, ~~strikethroughs~~, and more while formatting attachments and embeds beautifully. Built-in XSS protection prevents users from inserting HTML tags.
+
+### Updated Features:
+- **Dynamic Favicon**: The favicon updates based on the channel's avatar (DMs or server channels), providing a more personalized browsing experience.
+- **Dynamic Tab Title**: The tab title now reflects the current channel's name (or the recipient's username for DMs), making it easier to identify the content you are viewing.
 
 **This module is built purely for fun purposes with no intent to violate Discord's Terms of Service. Use it responsibly.**
 
@@ -77,3 +83,5 @@ const attachment = await generateFromMessages(messages, channel, {
 ---
 
 **Disclaimer:** This modified version is a fork of [discord-html-transcripts](https://github.com/ItzDerock/discord-html-transcripts) and is created solely for fun purposes. It is not intended for misuse or to violate Discord's Terms of Service. Always ensure compliance with platform policies when using such tools.
+
+---
