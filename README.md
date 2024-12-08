@@ -1,5 +1,3 @@
----
-
 # Discord.js-selfbot-v13 Selfbot Transcripts
 
 [![Discord](https://img.shields.io/discord/1275486972252786730?label=discord)](https://discord.gg/viish)
@@ -83,5 +81,3 @@ const attachment = await generateFromMessages(messages, channel, {
 ---
 
 **Disclaimer:** This modified version is a fork of [discord-html-transcripts](https://github.com/ItzDerock/discord-html-transcripts) and is created solely for fun purposes. It is not intended for misuse or to violate Discord's Terms of Service. Always ensure compliance with platform policies when using such tools.
-
----
